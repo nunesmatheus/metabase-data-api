@@ -1,0 +1,3 @@
+event:
+  name: Visisted page
+  options: { device_os: 'Android' }
