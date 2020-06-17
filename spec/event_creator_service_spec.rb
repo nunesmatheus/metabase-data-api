@@ -6,7 +6,7 @@ RSpec.describe EventCreatorService do
   context 'when no custom field is given' do
     it 'defines constant' do
       expect { Event }.to raise_error NameError
-      EventCreatorService.call
+      expect(EventCreatorService.call).to eq Event
       expect { Event }.to_not raise_error NameError
     end
   end
@@ -16,7 +16,7 @@ RSpec.describe EventCreatorService do
 
     it 'defines constant' do
       expect { Event }.to raise_error NameError
-      EventCreatorService.call(fields)
+      expect(EventCreatorService.call(fields)).to eq Event
       expect(Event.fields.keys).to include 'custom_property'
       expect { Event }.to_not raise_error NameError
     end
