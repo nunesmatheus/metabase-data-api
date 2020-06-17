@@ -1,0 +1,4 @@
+en:
+  controllers:
+    base:
+      missing_required_params: 'Necessary params not sent: %{params}'
