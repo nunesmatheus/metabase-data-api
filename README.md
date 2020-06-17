@@ -1,24 +1,5 @@
-# README
+# Metabase Data API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Purpose
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The purpose of this project is to provide an API to insert events on a database shared with an instance of [Metabase](https://www.metabase.com/). This is an independent initiative powered by my enthusiasm for this great open source tool which is the afore mentioned [Metabase](https://www.metabase.com/).
