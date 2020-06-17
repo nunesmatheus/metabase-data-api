@@ -12,6 +12,6 @@ class Api::EventsController < ApplicationController
   private
 
   def event_params
-    params.permit(:name, options: {})
+    params.permit(:name, :ocurred_at, options: {})
   end
 end

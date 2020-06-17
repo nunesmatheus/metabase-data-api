@@ -6,17 +6,17 @@ RSpec.describe Event, type: :model do
 
     context 'when ocurred_at is given' do
       before do
-        event.ocurred_at = Time.current + 1.day
+        event.ocurred_at = Time.current - 1.day
         event.save!
       end
 
-      it { expect(event.ocurred_at.to_date).to eq Date.tomorrow }
+      it { expect(event.ocurred_at.to_date).to eq (Time.current - 1.day).to_date }
     end
 
     context 'when ocurred_at is NOT given' do
       before { event.save! }
 
-      it { expect(event.ocurred_at.to_date).to eq Date.today }
+      it { expect(event.ocurred_at.to_date).to eq Time.current.to_date }
     end
   end
 
