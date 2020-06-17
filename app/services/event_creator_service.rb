@@ -6,7 +6,7 @@ class EventCreatorService < ApplicationService
     { name: 'ocurred_at', type: DateTime }
   ]
 
-  def initialize(fields=[])
+  def initialize(fields={})
     @custom_fields = fields
   end
 
