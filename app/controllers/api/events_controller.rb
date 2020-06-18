@@ -17,6 +17,6 @@ class Api::EventsController < Api::ApplicationController
   def event_params
     {
       name: params[:name], ocurred_at: params[:ocurred_at]
-    }.merge(params[:options].permit!)
+    }.merge(params[:options]&.permit! || {})
   end
 end

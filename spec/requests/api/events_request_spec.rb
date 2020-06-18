@@ -3,16 +3,28 @@ require 'rails_helper'
 RSpec.describe Api::EventsController do
   describe '#create' do
     context 'with required params' do
-      before do
-        post '/api/events',
-             params: { name: 'My Custom Event',
-                       options: { 'custom_property' => 'value' } }
+      context 'with options' do
+        before do
+          post '/api/events',
+               params: { name: 'My Custom Event',
+                         options: { 'custom_property' => 'value' } }
+        end
+
+        it { expect(response).to have_http_status :ok }
+        it { expect(Event.last.name).to eq 'My Custom Event' }
+        it { expect(Event.last.custom_property).to eq 'value' }
+        it { expect(Event.count).to eq 1 }
       end
 
-      it { expect(response).to have_http_status :ok }
-      it { expect(Event.last.name).to eq 'My Custom Event' }
-      it { expect(Event.last.custom_property).to eq 'value' }
-      it { expect(Event.count).to eq 1 }
+      context 'without options' do
+        before do
+          post '/api/events', params: { name: 'My Custom Event' }
+        end
+
+        it { expect(response).to have_http_status :ok }
+        it { expect(Event.last.name).to eq 'My Custom Event' }
+        it { expect(Event.count).to eq 1 }
+      end
     end
 
     context 'without required params' do
