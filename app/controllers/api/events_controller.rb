@@ -3,7 +3,7 @@ class Api::EventsController < Api::ApplicationController
     return if !require_params(:name)
 
     EventCreatorService.call(params[:options] || {})
-    event = Event.create!(event_params)
+    event = Event.create(event_params)
 
     if event.persisted?
       render json: event
