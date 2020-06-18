@@ -173,5 +173,4 @@ production:
       database: metabase_data_api_development
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
-      hosts:
-        - "<%= ENV['MONGO_DB_URL'] %>"
+      uri: "<%= ENV['MONGODB_URI'] %>"
