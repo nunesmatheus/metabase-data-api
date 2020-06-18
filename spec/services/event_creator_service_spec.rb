@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EventCreatorService do
-  after { Object.send(:remove_const, :Event) }
+  before { Object.send(:remove_const, :Event) }
 
   context 'when no custom field is given' do
     let(:event_class) { EventCreatorService.call }
