@@ -12,9 +12,9 @@ class Event
   field :browser_version, type: String
   field :platform, type: String
 
-  validates :name, presence: true
-
   before_validation :set_ocurred_at
+
+  validates :name, presence: true
 
   private
 
