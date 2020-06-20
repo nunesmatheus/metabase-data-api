@@ -17,7 +17,7 @@ class Api::EventsController < Api::ApplicationController
   private
 
   def event_params
-    geolocation = Geocoder.search(request.ip).first
+    geolocation = Geocoder.search(request.remote_ip).first
     user_agent = UserAgent.parse(request.user_agent)
     {
       name: params[:name], ocurred_at: params[:ocurred_at],

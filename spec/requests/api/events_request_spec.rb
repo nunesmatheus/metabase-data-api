@@ -8,7 +8,7 @@ RSpec.describe Api::EventsController do
       context 'with options' do
         before do
           allow_any_instance_of(ActionDispatch::Request).to(
-            receive(:ip).and_return('172.217.172.206')
+            receive(:remote_ip).and_return('172.217.172.206')
           )
           VCR.use_cassette 'geolocation' do
             post '/api/events',
