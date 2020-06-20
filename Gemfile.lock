@@ -207,7 +207,6 @@ DEPENDENCIES
   rspec-rails (~> 4.0.0)
   spring
   spring-watcher-listen (~> 2.0.0)
-  tzinfo-data
   useragent (~> 0.16.10)
   vcr (~> 6.0.0)
   webmock (~> 3.8.3)
