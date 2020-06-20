@@ -46,4 +46,5 @@ group :test do
   gem 'database_cleaner-mongo'
   gem 'vcr', '~> 6.0.0'
   gem 'webmock', '~> 3.8.3'
+  gem 'simplecov', require: false
 end
