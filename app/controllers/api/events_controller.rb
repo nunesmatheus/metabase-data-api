@@ -5,13 +5,13 @@ module Api
     def create
       return unless require_params(:name)
 
-      EventCreatorService.call(params[:options] || {})
-      event = Event.create(event_params)
+      EventCreatorService.call(params[:options]&.permit!&.to_h || {})
+      event = CustomEvent.create(event_params)
 
       if event.persisted?
         render json: event
       else
-        render json: event.errors, status: :unprocessable_entity
+        render json: { errors: event.errors }, status: :unprocessable_entity
       end
     end
 
@@ -24,10 +24,7 @@ module Api
     def default_params
       return @params if @params.present?
 
-      @params =
-        params.permit(:name, :ocurred_at).merge(params[:options]&.permit! || {})
-      @params[:ocurred_at] ||= Time.current
-      @params
+      params.permit(:name, :ocurred_at).merge(params[:options]&.permit! || {})
     end
 
     def geolocation_attributes

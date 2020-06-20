@@ -90,3 +90,10 @@ RSpec.configure do |config|
     c.cassette_library_dir = 'spec/cassettes'
   end
 end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
