@@ -20,6 +20,7 @@ RSpec.describe Api::EventsController do
         it { expect(response).to have_http_status :ok }
         it { expect(Event.last.name).to eq 'My Custom Event' }
         it { expect(Event.last.custom_property).to eq 'value' }
+        it { expect(Event.last.ocurred_at.to_date).to eq Time.zone.today }
         it { expect(Event.count).to eq 1 }
 
         it 'persists geolocation data' do
@@ -37,11 +38,13 @@ RSpec.describe Api::EventsController do
 
       context 'without options' do
         before do
-          post '/api/events', params: { name: 'My Custom Event' }
+          post '/api/events', params: { name: 'My Custom Event',
+                                        ocurred_at: Time.zone.tomorrow }
         end
 
         it { expect(response).to have_http_status :ok }
         it { expect(Event.last.name).to eq 'My Custom Event' }
+        it { expect(Event.last.ocurred_at.to_date).to eq Time.zone.tomorrow }
         it { expect(Event.count).to eq 1 }
       end
     end

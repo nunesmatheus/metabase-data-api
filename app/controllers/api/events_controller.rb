@@ -22,7 +22,12 @@ module Api
     end
 
     def default_params
-      params.permit(:name, :ocurred_at).merge(params[:options]&.permit! || {})
+      return @params if @params.present?
+
+      @params =
+        params.permit(:name, :ocurred_at).merge(params[:options]&.permit! || {})
+      @params[:ocurred_at] ||= Time.current
+      @params
     end
 
     def geolocation_attributes
