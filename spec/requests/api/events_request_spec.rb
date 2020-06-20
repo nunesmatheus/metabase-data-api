@@ -18,21 +18,21 @@ RSpec.describe Api::EventsController do
         end
 
         it { expect(response).to have_http_status :ok }
-        it { expect(Event.last.name).to eq 'My Custom Event' }
-        it { expect(Event.last.custom_property).to eq 'value' }
-        it { expect(Event.last.ocurred_at.to_date).to eq Time.zone.today }
-        it { expect(Event.count).to eq 1 }
+        it { expect(CustomEvent.last.name).to eq 'My Custom Event' }
+        it { expect(CustomEvent.last.custom_property).to eq 'value' }
+        it { expect(CustomEvent.last.ocurred_at.to_date).to eq Time.zone.today }
+        it { expect(CustomEvent.count).to eq 1 }
 
         it 'persists geolocation data' do
-          expect(Event.last.country).to eq 'Brazil'
-          expect(Event.last.state).to eq 'São Paulo'
-          expect(Event.last.city).to eq 'Guarulhos'
+          expect(CustomEvent.last.country).to eq 'Brazil'
+          expect(CustomEvent.last.state).to eq 'São Paulo'
+          expect(CustomEvent.last.city).to eq 'Guarulhos'
         end
 
         it 'persists browser data' do
-          expect(Event.last.browser).to be_present
-          expect(Event.last.browser_version).to be_present
-          expect(Event.last.platform).to be_present
+          expect(CustomEvent.last.browser).to be_present
+          expect(CustomEvent.last.browser_version).to be_present
+          expect(CustomEvent.last.platform).to be_present
         end
       end
 
@@ -43,9 +43,18 @@ RSpec.describe Api::EventsController do
         end
 
         it { expect(response).to have_http_status :ok }
-        it { expect(Event.last.name).to eq 'My Custom Event' }
-        it { expect(Event.last.ocurred_at.to_date).to eq Time.zone.tomorrow }
-        it { expect(Event.count).to eq 1 }
+        it { expect(CustomEvent.last.name).to eq 'My Custom Event' }
+        it { expect(CustomEvent.last.ocurred_at.to_date).to eq Time.zone.tomorrow }
+        it { expect(CustomEvent.count).to eq 1 }
+      end
+
+      context 'with invalid information' do
+        before do
+          post '/api/events', params: { name: '' }
+        end
+
+        it { expect(response).to have_http_status :unprocessable_entity }
+        it { expect(json_response['errors']['name']).to be_present }
       end
     end
 
@@ -54,7 +63,7 @@ RSpec.describe Api::EventsController do
 
       it { expect(response).to have_http_status :unprocessable_entity }
       it { expect(json_response['error']).to include 'name' }
-      it { expect(Event.count).to eq 0 }
+      it { expect(CustomEvent.count).to eq 0 }
     end
   end
 end

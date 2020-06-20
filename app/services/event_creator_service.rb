@@ -3,30 +3,34 @@
 class EventCreatorService < ApplicationService
   attr_accessor :custom_fields
 
-  DEFAULT_FIELDS = [
-    { name: 'name', type: String },
-    { name: 'ocurred_at', type: DateTime },
-    { name: 'country', type: String },
-    { name: 'state', type: String },
-    { name: 'city', type: String },
-    { name: 'browser', type: String },
-    { name: 'browser_version', type: String },
-    { name: 'platform', type: String }
-  ]
-
   def initialize(fields = {})
-    @custom_fields = fields
+    @custom_fields = fields.to_h
   end
 
   def call
-    DynamicCollection.create('Event', fields)
+    remove_constant
+
+    class_fields = fields
+    klass = Class.new(Event) do
+      class_fields.each do |item|
+        field item[:name], type: item[:type]
+      end
+    end
+
+    Object.const_set('CustomEvent', klass)
   end
 
+  private
+
   def fields
-    fields = DEFAULT_FIELDS
-    custom_fields.each do |option, _value|
-      fields << { name: option, type: String }
+    custom_fields.map do |option, _value|
+      { name: option, type: String }
     end
-    fields
+  end
+
+  def remove_constant
+    return unless Object.constants.include?('CustomEvent')
+
+    Object.send(:remove_const, 'CustomEvent')
   end
 end
