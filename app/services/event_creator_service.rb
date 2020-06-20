@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventCreatorService < ApplicationService
   attr_accessor :custom_fields
 
@@ -10,9 +12,9 @@ class EventCreatorService < ApplicationService
     { name: 'browser', type: String },
     { name: 'browser_version', type: String },
     { name: 'platform', type: String }
-  ]
+  ].freeze
 
-  def initialize(fields={})
+  def initialize(fields = {})
     @custom_fields = fields
   end
 
@@ -22,7 +24,7 @@ class EventCreatorService < ApplicationService
 
   def fields
     fields = DEFAULT_FIELDS
-    custom_fields.each do |option, value|
+    custom_fields.each do |option, _value|
       fields << { name: option, type: String }
     end
     fields

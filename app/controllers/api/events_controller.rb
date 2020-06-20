@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Api::EventsController < Api::ApplicationController
   def create
-    return if !require_params(:name)
+    return unless require_params(:name)
 
     EventCreatorService.call(params[:options] || {})
     event = Event.create(event_params)

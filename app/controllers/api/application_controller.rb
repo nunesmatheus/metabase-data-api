@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::ApplicationController < ActionController::API
   skip_before_action :verify_authenticity_token
 
@@ -7,7 +9,7 @@ class Api::ApplicationController < ActionController::API
 
     render json: {
                     error: I18n.t('controllers.base.missing_required_params',
-                    params: required_params.join(', '))
+                                  params: required_params.join(', '))
                  },
            status: :unprocessable_entity
     false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DynamicCollection
   def self.create(collection, fields)
     if Object.constants.include?(collection)
