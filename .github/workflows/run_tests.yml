@@ -10,4 +10,12 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install gems
-      run: bundle install
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        curl \
+             --header "Content-type: application/json" \
+             --header "Accept: application/vnd.github.antiope-preview+json" \
+             --header "Authorization": "Bearer ${GITHUB_TOKEN}" \
+             --data '{ "name":"Coverage", "head_sha":"${GITHUB_SHA}", "status":"in_progress" }' \
+             "https://api.github.com/repos/nunesmatheus/metabase-data-api/check-runs"
