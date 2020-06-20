@@ -7,9 +7,11 @@ RSpec.describe Api::EventsController do
         before do
           allow_any_instance_of(ActionDispatch::Request).to(
             receive(:ip).and_return('172.217.172.206'))
-          post '/api/events',
-               params: { name: 'My Custom Event',
-                         options: { 'custom_property' => 'value' } }
+          VCR.use_cassette 'geolocation' do
+            post '/api/events',
+              headers: { 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.56 Safari/536.5' },
+                 params: { name: 'My Custom Event', options: { 'custom_property' => 'value' } }
+          end
         end
 
         it { expect(response).to have_http_status :ok }

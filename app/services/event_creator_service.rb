@@ -6,7 +6,10 @@ class EventCreatorService < ApplicationService
     { name: 'ocurred_at', type: DateTime },
     { name: 'country', type: String },
     { name: 'state', type: String },
-    { name: 'city', type: String }
+    { name: 'city', type: String },
+    { name: 'browser', type: String },
+    { name: 'version', type: String },
+    { name: 'platform', type: String }
   ]
 
   def initialize(fields={})

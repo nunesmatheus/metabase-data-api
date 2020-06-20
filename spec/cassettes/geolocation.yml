@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.ipstack.com/172.217.172.206?access_key=367a6e94350e561a6f3b68bf9a3a81a7
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 20 Jun 2020 04:20:19 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d71b16a161b8b7960dca34d3407e2270d1592626818; expires=Mon, 20-Jul-20
+        04:20:18 GMT; path=/; domain=.ipstack.com; HttpOnly; SameSite=Lax
+      X-Apilayer-Transaction-Id:
+      - ced3b707-e239-4417-857f-71830cbd6e9f
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.022'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cf-Request-Id:
+      - '03718dc7a40000eed2ae22f200000001'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 5a62b252aaf2eed2-GRU
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ip":"172.217.172.206","type":"ipv4","continent_code":"SA","continent_name":"South
+        America","country_code":"BR","country_name":"Brazil","region_code":"SP","region_name":"S\u00e3o
+        Paulo","city":"Guarulhos","zip":"07010-000","latitude":-23.468320846557617,"longitude":-46.52777099609375,"location":{"geoname_id":3461786,"capital":"Bras\u00edlia","languages":[{"code":"pt","name":"Portuguese","native":"Portugu\u00eas"}],"country_flag":"http:\/\/assets.ipstack.com\/flags\/br.svg","country_flag_emoji":"\ud83c\udde7\ud83c\uddf7","country_flag_emoji_unicode":"U+1F1E7
+        U+1F1F7","calling_code":"55","is_eu":false}}'
+  recorded_at: Sat, 20 Jun 2020 04:20:19 GMT
+recorded_with: VCR 6.0.0

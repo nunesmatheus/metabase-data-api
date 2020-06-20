@@ -19,8 +19,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'mongoid', '~> 7.0.5'
 
-# Geolocation
+# Default information tracking
 gem 'geocoder', '~> 1.6.3'
+gem 'useragent', '~> 0.16.10'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
@@ -41,6 +42,8 @@ end
 
 group :test do
   gem 'database_cleaner-mongo'
+  gem 'vcr', '~> 6.0.0'
+  gem 'webmock', '~> 3.8.3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
