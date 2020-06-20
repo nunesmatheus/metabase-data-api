@@ -12,7 +12,7 @@ class EventCreatorService < ApplicationService
     { name: 'browser', type: String },
     { name: 'browser_version', type: String },
     { name: 'platform', type: String }
-  ].freeze
+  ]
 
   def initialize(fields = {})
     @custom_fields = fields
