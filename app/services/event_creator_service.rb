@@ -8,7 +8,7 @@ class EventCreatorService < ApplicationService
     { name: 'state', type: String },
     { name: 'city', type: String },
     { name: 'browser', type: String },
-    { name: 'version', type: String },
+    { name: 'browser_version', type: String },
     { name: 'platform', type: String }
   ]
 

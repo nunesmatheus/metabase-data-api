@@ -24,6 +24,12 @@ RSpec.describe Api::EventsController do
           expect(Event.last.state).to be_present
           expect(Event.last.city).to be_present
         end
+
+        it 'persists browser data' do
+          expect(Event.last.browser).to be_present
+          expect(Event.last.browser_version).to be_present
+          expect(Event.last.platform).to be_present
+        end
       end
 
       context 'without options' do
