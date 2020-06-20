@@ -20,9 +20,9 @@ RSpec.describe Api::EventsController do
         it { expect(Event.count).to eq 1 }
 
         it 'persists geolocation data' do
-          expect(Event.last.country).to be_present
-          expect(Event.last.state).to be_present
-          expect(Event.last.city).to be_present
+          expect(Event.last.country).to eq 'Brazil'
+          expect(Event.last.state).to eq 'São Paulo'
+          expect(Event.last.city).to eq 'Guarulhos'
         end
 
         it 'persists browser data' do
