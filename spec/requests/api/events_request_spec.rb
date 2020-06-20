@@ -5,6 +5,8 @@ RSpec.describe Api::EventsController do
     context 'with required params' do
       context 'with options' do
         before do
+          allow_any_instance_of(ActionDispatch::Request).to(
+            receive(:ip).and_return('172.217.172.206'))
           post '/api/events',
                params: { name: 'My Custom Event',
                          options: { 'custom_property' => 'value' } }
@@ -14,6 +16,12 @@ RSpec.describe Api::EventsController do
         it { expect(Event.last.name).to eq 'My Custom Event' }
         it { expect(Event.last.custom_property).to eq 'value' }
         it { expect(Event.count).to eq 1 }
+
+        it 'persists geolocation data' do
+          expect(Event.last.country).to be_present
+          expect(Event.last.state).to be_present
+          expect(Event.last.city).to be_present
+        end
       end
 
       context 'without options' do

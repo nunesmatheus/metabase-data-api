@@ -19,6 +19,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'mongoid', '~> 7.0.5'
 
+# Geolocation
+gem 'geocoder', '~> 1.6.3'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -26,6 +29,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'dotenv-rails'
 end
 
 group :development do

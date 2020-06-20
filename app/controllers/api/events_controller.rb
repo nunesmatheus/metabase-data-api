@@ -15,8 +15,11 @@ class Api::EventsController < Api::ApplicationController
   private
 
   def event_params
+    geolocation = Geocoder.search(request.ip).first
     {
-      name: params[:name], ocurred_at: params[:ocurred_at]
+      name: params[:name], ocurred_at: params[:ocurred_at],
+      country: geolocation&.country, state: geolocation&.state,
+      city: geolocation&.city
     }.merge(params[:options]&.permit! || {})
   end
 end

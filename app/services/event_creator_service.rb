@@ -3,7 +3,10 @@ class EventCreatorService < ApplicationService
 
   DEFAULT_FIELDS = [
     { name: 'name', type: String },
-    { name: 'ocurred_at', type: DateTime }
+    { name: 'ocurred_at', type: DateTime },
+    { name: 'country', type: String },
+    { name: 'state', type: String },
+    { name: 'city', type: String }
   ]
 
   def initialize(fields={})
