@@ -23,7 +23,7 @@ jobs:
     - name: Build application
       run: |
         sudo gem install bundler
-        bundle config set deployment
+        bundle config set deployment 'true'
         bundle install
         rspec
 
