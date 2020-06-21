@@ -9,6 +9,20 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Cache Dependencies
+      id: cache-dependencies
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-bundle
+
+
+    - name: Build application
+      run: |
+        gem install bundle
+        bundle install --deployment
+        rspec
+
     - name: Coverage action
       uses: nunesmatheus/check-runs-action@master
       with:
