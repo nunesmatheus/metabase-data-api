@@ -20,12 +20,14 @@ jobs:
       with:
         ruby-version: '2.7.1'
 
-    - name: Build application
+    - name: Install dependencies
       run: |
         sudo gem install bundler
         bundle config set deployment 'true'
         bundle install
-        rspec
+
+    - name: Run test suite
+      run: bundle exec rspec
 
     - name: Coverage action
       uses: nunesmatheus/check-runs-action@master
