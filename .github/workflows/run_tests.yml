@@ -19,7 +19,7 @@ jobs:
 
     - name: Build application
       run: |
-        gem install bundle
+        sudo gem install bundler
         bundle install --deployment
         rspec
 
