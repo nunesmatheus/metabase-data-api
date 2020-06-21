@@ -16,4 +16,4 @@ jobs:
         title: Test coverage
         output-message: 92% de coverage
         conclusion: failure
-
+        summary: Low coverage value
