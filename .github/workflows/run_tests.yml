@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Coverage action
-      uses: nunesmatheus/check-runs-action
+      uses: nunesmatheus/check-runs-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         title: Test coverage
