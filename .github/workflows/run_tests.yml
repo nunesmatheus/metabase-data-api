@@ -9,7 +9,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Rubocop Linter Action
-      uses: andrewmcodes/rubocop-linter-action@v3.2.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Coverage action
+      uses: nunesmatheus/check-runs-action
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        title: Test coverage
+        output-message: 92% de coverage
+
