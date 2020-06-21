@@ -16,11 +16,15 @@ jobs:
         path: vendor/bundle
         key: ${{ runner.os }}-bundle
 
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7.1'
 
     - name: Build application
       run: |
         sudo gem install bundler
-        bundle install --deployment
+        bundle config set deployment
+        bundle install
         rspec
 
     - name: Coverage action
