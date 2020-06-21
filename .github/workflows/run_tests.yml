@@ -15,4 +15,5 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         title: Test coverage
         output-message: 92% de coverage
+        conclusion: failure
 
