@@ -1,0 +1,58 @@
+name: Run tests
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache Dependencies
+      id: cache-dependencies
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-bundle
+
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.7.1'
+
+    - name: Install dependencies
+      run: |
+        sudo gem install bundler
+        bundle config set deployment 'true'
+        bundle install
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.3.0
+
+    - name: Run test suite
+      run: bundle exec rspec
+
+    - name: Set coverage info
+      id: coverage
+      run: |
+        coverage=$(ruby coverage-fetcher.rb)
+        echo "::set-output name=coverage_percentage::$coverage"
+        if (( $(echo "$coverage < 100.0" |bc -l) )); then
+          conclusion=failure
+          summary='Only acceptable coverage percentage is 100%'
+        else
+          conclusion=success
+          summary='100% coverage!'
+        fi
+
+        echo "::set-output name=conclusion::$conclusion"
+        echo "::set-output name=summary::$summary"
+
+    - name: Coverage action
+      uses: nunesmatheus/check-runs-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        title: Test coverage
+        output-message: ${{ steps.coverage.outputs.coverage_percentage }}% coverage
+        conclusion: ${{ steps.coverage.outputs.conclusion }}
+        summary: ${{ steps.coverage.outputs.summary }}

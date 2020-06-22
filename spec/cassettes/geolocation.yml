@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api.ipstack.com/172.217.172.206?access_key=367a6e94350e561a6f3b68bf9a3a81a7
+    uri: http://api.ipstack.com/172.217.172.206?access_key=123456
     body:
       encoding: US-ASCII
       string: ''

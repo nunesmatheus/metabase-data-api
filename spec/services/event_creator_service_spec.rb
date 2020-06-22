@@ -3,12 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe EventCreatorService do
-  before(:example) do
-    if Object.constants.include?('CustomEvent')
-      Object.send(:remove_const, :CustomEvent)
-    end
-  end
-
   context 'when no custom field is given' do
     let(:event_class) { EventCreatorService.call }
 
@@ -21,6 +15,12 @@ RSpec.describe EventCreatorService do
       event_class
       expect(CustomEvent.fields.keys).to include 'name'
       expect(CustomEvent.fields.keys).to include 'ocurred_at'
+    end
+
+    it 'when constant has been defined already' do
+      EventCreatorService.call
+      EventCreatorService.call
+      expect(Object.constants).to include :CustomEvent
     end
   end
 
