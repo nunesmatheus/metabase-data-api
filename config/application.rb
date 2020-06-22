@@ -42,6 +42,5 @@ module MetabaseDataApi
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     config.time_zone = ENV['TIMEZONE'] if ENV['TIMEZONE'].present?
-    config.active_record.default_timezone = :local
   end
 end
