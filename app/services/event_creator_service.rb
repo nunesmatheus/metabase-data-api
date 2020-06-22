@@ -29,8 +29,8 @@ class EventCreatorService < ApplicationService
   end
 
   def remove_constant
-    return unless Object.constants.include?('CustomEvent')
+    return unless Object.constants.include?(:CustomEvent)
 
-    Object.send(:remove_const, 'CustomEvent')
+    Object.send(:remove_const, :CustomEvent)
   end
 end
