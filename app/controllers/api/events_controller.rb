@@ -2,6 +2,8 @@
 
 module Api
   class EventsController < ApplicationController
+    before_action :require_authentication
+
     def create
       return unless require_params(:name)
 
