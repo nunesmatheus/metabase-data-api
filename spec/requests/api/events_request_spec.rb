@@ -65,5 +65,45 @@ RSpec.describe Api::EventsController do
       it { expect(json_response['error']).to include 'name' }
       it { expect(CustomEvent.count).to eq 0 }
     end
+
+    context 'when api token env var is present' do
+      let(:token) { SecureRandom.hex }
+
+      before { ENV['API_TOKEN'] = token }
+
+      context 'and api token is sent' do
+        context 'and is correct' do
+          before do
+            post '/api/events',
+                 headers: { Authorization: "Bearer #{token}" },
+                 params: { name: 'My Custom Event',
+                           ocurred_at: Time.zone.tomorrow }
+          end
+
+          it { expect(response).to have_http_status :ok }
+        end
+
+        context 'but is incorrect' do
+          before do
+            post '/api/events',
+                 headers: { Authorization: 'Bearer 123456' },
+                 params: { name: 'My Custom Event',
+                           ocurred_at: Time.zone.tomorrow }
+          end
+
+          it { expect(response).to have_http_status :unauthorized }
+        end
+      end
+
+      context 'and api token is not sent' do
+        before do
+          post '/api/events',
+               params: { name: 'My Custom Event',
+                         ocurred_at: Time.zone.tomorrow }
+        end
+
+        it { expect(response).to have_http_status :unauthorized }
+      end
+    end
   end
 end
